@@ -33,7 +33,8 @@ const SellSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
+    // required: true,
+    default: new Date()
   },
   status: {
     type: String,

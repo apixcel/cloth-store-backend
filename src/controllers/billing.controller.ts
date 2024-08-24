@@ -25,7 +25,6 @@ export const createBillingInfo = catchAsyncError(
   async (req: Request, res: Response) => {
     const { user, address, city, contact, postalCode, country } = req.body;
 
-    console.log("user", req.body);
     
 
     const isExistUser = await Customer.findById(user);

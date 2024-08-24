@@ -31,6 +31,8 @@ export const createSellController = catchAsyncError(
       status,
     } = req.body;
 
+    // console.log("order creation", req.body);
+
     try {
       const customerExists = await Customer.findById(customer);
 
@@ -45,6 +47,8 @@ export const createSellController = catchAsyncError(
 
       for (const item of sellData) {
         const { productId, quantity } = item;
+        // console.log("wwwwork", item);
+
         const product = await Product.findById(productId);
 
         if (!product) {
@@ -80,7 +84,7 @@ export const createSellController = catchAsyncError(
       }
 
       const newSell = await Sell.create({
-        sellData,
+        sellData: [...sellData],
         totalAmount,
         paymentMethod,
         paymentStatus,
@@ -88,6 +92,8 @@ export const createSellController = catchAsyncError(
         date,
         status,
       });
+
+      // console.log("aaaaaaaaaa", newSell);
 
       sendResponse(res, {
         statusCode: 201,
@@ -145,7 +151,7 @@ export const trackCustomerOrder = catchAsyncError(async (req, res) => {
 
   const isExistOrder = await Sell.findById(orderId)
     .populate("customer")
-    .populate("productId");
+    .populate("sellData.productId");
   if (!isExistOrder) {
     return sendResponse(res, {
       success: false,
@@ -285,7 +291,7 @@ export const deleteSellController = catchAsyncError(
 export const getCustomerBasedSellsController = catchAsyncError(
   async (req, res) => {
     const userAuth = req.user;
-    console.log("fasdfasd");
+    // console.log("fasdfasd");
     if (!userAuth) return res.status(204).send({});
 
     const isCustomerExist = await Customer.findOne({ email: userAuth.email });

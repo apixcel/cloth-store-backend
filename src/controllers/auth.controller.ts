@@ -59,7 +59,7 @@ export const genereteAccessToken = catchAsyncError(async (req, res) => {
     return res.status(400).json({ msg: "Invalid Authentication." });
 
   const refreshToken = getToken.split(" ")[1];
-  console.log({ refreshToken });
+  // console.log({ refreshToken });
 
   const refreshTokenSecret = process.env.JWT_REFRESH_SECRET as string;
 

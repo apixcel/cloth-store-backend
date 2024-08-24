@@ -31,7 +31,7 @@ export const createProductController = catchAsyncError(
       description,
     } = req.body;
 
-    console.log("aaaaaa", req.body);
+    // console.log("aaaaaa", req.body);
     
 
     try {

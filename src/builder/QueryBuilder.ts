@@ -7,7 +7,7 @@ class QueryBuilder<T> {
   constructor(modelQuery: Query<T[], T>, query: Record<string, unknown>) {
     this.modelQuery = modelQuery;
     this.query = query;
-    console.log("Initial query:", this.query);
+    // console.log("Initial query:", this.query);
   }
 
   search(searchableFields: string[]) {
@@ -46,7 +46,7 @@ class QueryBuilder<T> {
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
     this.modelQuery = this.modelQuery.find(JSON.parse(queryStr));
-    console.log("Query after general filtering:", queryStr);
+    // console.log("Query after general filtering:", queryStr);
 
     // Price filtering
     if (this.query.minPrice || this.query.maxPrice) {

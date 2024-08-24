@@ -104,7 +104,6 @@ export const updateCategoryController = catchAsyncError(
       const { id } = req.params;
       const updateData = req.body;
 
-      console.log("sssssss", updateData)
 
       const updatedCategory = await Category.findByIdAndUpdate(id, updateData, {
         new: true,
